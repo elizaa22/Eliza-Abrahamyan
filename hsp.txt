@@ -1,0 +1,18 @@
+.include 'path/to/your/model.lib' * Include MOSFET model library
+
+VDD Vdd 0 DC 5V                  * Define VDD power supply
+VIN Vin 0 PULSE 0 5 0n 1n 1n 10n 20n * Define input voltage (pulse signal)
+
+Rin Vin_in Vin 10k               * Input resistor
+
+
+M1 Vout Vin_in 0 0 NMOS L=1u W=10u * NMOS transistor
+M2 Vout Vdd Vdd Vdd PMOS L=1u W=10u * PMOS transistor
+
+Rload Vout 0 1k                  * Load resistor
+Rout Vout Vout_out 500           * Output resistor
+
+
+* Simulation commands
+.TRAN 1n 100n                    * Transient analysis
+.END
